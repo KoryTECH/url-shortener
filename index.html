@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shortly - More than just shorter links</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          Oxygen, Ubuntu, Cantarell, sans-serif;
+        color: #333;
+        line-height: 1.6;
+      }
+
+      /* Header */
+      header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1.5rem 5%;
+        background: white;
+      }
+
+      .logo {
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: #2d3748;
+      }
+
+      nav {
+        display: flex;
+        gap: 2rem;
+        align-items: center;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 2rem;
+        list-style: none;
+      }
+
+      .nav-links a {
+        text-decoration: none;
+        color: #718096;
+        font-weight: 500;
+        transition: color 0.3s;
+      }
+
+      .nav-links a:hover {
+        color: #2d3748;
+      }
+
+      .auth-buttons {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+      }
+
+      .btn-login {
+        color: #718096;
+        text-decoration: none;
+        font-weight: 500;
+      }
+
+      .btn-signup {
+        background: #2dd4bf;
+        color: white;
+        padding: 0.6rem 1.5rem;
+        border-radius: 25px;
+        text-decoration: none;
+        font-weight: 600;
+        transition: background 0.3s;
+      }
+
+      .btn-signup:hover {
+        background: #14b8a6;
+      }
+
+      .mobile-menu {
+        display: none;
+        flex-direction: column;
+        gap: 0.3rem;
+        cursor: pointer;
+      }
+
+      .mobile-menu span {
+        width: 25px;
+        height: 3px;
+        background: #2d3748;
+        border-radius: 3px;
+      }
+
+      /* Hero Section */
+      .hero {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 4rem 5%;
+        gap: 3rem;
+      }
+
+      .hero-content {
+        flex: 1;
+        max-width: 550px;
+      }
+
+      .hero h1 {
+        font-size: 3.5rem;
+        font-weight: 800;
+        color: #2d3748;
+        line-height: 1.1;
+        margin-bottom: 1rem;
+      }
+
+      .hero p {
+        color: #718096;
+        font-size: 1.1rem;
+        margin-bottom: 2rem;
+      }
+
+      .btn-primary {
+        background: #2dd4bf;
+        color: white;
+        padding: 0.9rem 2rem;
+        border-radius: 25px;
+        text-decoration: none;
+        font-weight: 600;
+        display: inline-block;
+        transition: background 0.3s;
+      }
+
+      .btn-primary:hover {
+        background: #14b8a6;
+      }
+
+      .hero-illustration {
+        flex: 1;
+        max-width: 550px;
+      }
+
+      .hero-illustration img {
+        width: 100%;
+        height: auto;
+      }
+
+      /* Shortener Section */
+      .shortener {
+        background: #f7fafc;
+        padding: 2rem 5%;
+      }
+
+      .shortener-box {
+        background: #4c5270;
+        padding: 3rem;
+        border-radius: 15px;
+        max-width: 1100px;
+        margin: 0 auto;
+      }
+
+      .shortener-form {
+        display: flex;
+        gap: 1rem;
+      }
+
+      .shortener-input {
+        flex: 1;
+        padding: 1rem 1.5rem;
+        border: none;
+        border-radius: 8px;
+        font-size: 1rem;
+      }
+
+      .btn-shorten {
+        background: #2dd4bf;
+        color: white;
+        padding: 1rem 2.5rem;
+        border: none;
+        border-radius: 8px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.3s;
+      }
+
+      .btn-shorten:hover {
+        background: #14b8a6;
+      }
+      .display {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center; 
+        background: #f7fafc;;
+      }
+      .url-display {
+        width: 70%;
+        height: 100px;
+        background: #2d3748;
+        padding: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        border-radius: 10px;
+      }
+      .url-display a {
+        /* text-decoration: none; */
+        /* color: black; */
+        width: 100%;
+        height: 100%;
+        background: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 10px;
+        font-size: 1.5rem;
+        font-weight: 500;
+
+      }
+
+
+      /* Statistics Section */
+      .statistics {
+        padding: 5rem 5%;
+        background: #f7fafc;
+        text-align: center;
+      }
+
+      .statistics h2 {
+        font-size: 2.5rem;
+        font-weight: 800;
+        color: #2d3748;
+        margin-bottom: 1rem;
+      }
+
+      .statistics > p {
+        color: #718096;
+        font-size: 1.1rem;
+        max-width: 500px;
+        margin: 0 auto 4rem;
+      }
+
+      .features {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 2rem;
+        max-width: 1100px;
+        margin: 0 auto;
+
+      }
+
+      .feature-card {
+        background: white;
+        padding: 2.5rem 2rem;
+        border-radius: 10px;
+        text-align: left;
+        position: relative;
+      }
+
+      .feature-icon {
+        width: 80px;
+        height: 80px;
+        background: #4c5270;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 1.5rem;
+      }
+
+      .feature-icon svg {
+        width: 35px;
+        height: 35px;
+      }
+
+      .feature-card h3 {
+        font-size: 1.4rem;
+        color: #2d3748;
+        margin-bottom: 1rem;
+      }
+
+      .feature-card p {
+        color: #718096;
+        font-size: 0.95rem;
+      }
+
+      .feature-divider {
+        width: 50px;
+        height: 4px;
+        background: #2dd4bf;
+        margin: 1.5rem 0;
+      }
+
+      /* CTA Section */
+      .cta {
+        background: #4c5270;
+        padding: 4rem 5%;
+        text-align: center;
+      }
+
+      .cta h2 {
+        color: white;
+        font-size: 2.5rem;
+        font-weight: 800;
+        margin-bottom: 2rem;
+      }
+
+      /* Footer */
+      footer {
+        background: #232127;
+        padding: 4rem 5% 2rem;
+        color: white;
+      }
+
+      .footer-content {
+        display: flex;
+        justify-content: space-between;
+        max-width: 1200px;
+        margin: 0 auto 3rem;
+        gap: 3rem;
+      }
+
+      .footer-logo {
+        font-size: 1.8rem;
+        font-weight: 700;
+      }
+
+      .footer-links {
+        display: flex;
+        gap: 4rem;
+        flex: 1;
+        justify-content: flex-end;
+      }
+
+      .footer-column h4 {
+        font-size: 1rem;
+        margin-bottom: 1rem;
+        font-weight: 600;
+      }
+
+      .footer-column ul {
+        list-style: none;
+      }
+
+      .footer-column a {
+        color: #a0aec0;
+        text-decoration: none;
+        display: block;
+        margin-bottom: 0.5rem;
+        transition: color 0.3s;
+      }
+
+      .footer-column a:hover {
+        color: #2dd4bf;
+      }
+
+      .social-icons {
+        display: flex;
+        gap: 1.5rem;
+      }
+
+      .social-icons a {
+        color: white;
+        font-size: 1.3rem;
+        transition: color 0.3s;
+      }
+
+      .social-icons a:hover {
+        color: #2dd4bf;
+      }
+
+      /* Mobile Responsive */
+      @media (max-width: 768px) {
+        .nav-links,
+        .auth-buttons {
+          display: none;
+        }
+
+        .mobile-menu {
+          display: flex;
+        }
+
+        .hero {
+          flex-direction: column-reverse;
+          padding: 2rem 5%;
+        }
+
+        .hero h1 {
+          font-size: 2rem;
+        }
+
+        .shortener-box {
+          padding: 2rem 1.5rem;
+        }
+
+        .shortener-form {
+          flex-direction: column;
+        }
+
+        .features {
+          grid-template-columns: 1fr;
+        }
+
+        .footer-content {
+          flex-direction: column;
+          gap: 2rem;
+        }
+
+        .footer-links {
+          flex-direction: column;
+          gap: 2rem;
+        }
+
+        .social-icons {
+          justify-content: center;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <header>
+      <div class="logo">Shortly</div>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="#features">Features</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#resources">Resources</a></li>
+        </ul>
+        <div class="auth-buttons">
+          <a href="#login" class="btn-login">Login</a>
+          <a href="#signup" class="btn-signup">Sign Up</a>
+        </div>
+        <div class="mobile-menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="hero-content">
+        <h1>More than just shorter links</h1>
+        <p>
+          Build your brand's recognition and get detailed insights on how your
+          links are performing.
+        </p>
+        <a href="#get-started" class="btn-primary">Get Started</a>
+      </div>
+      <div class="hero-illustration">
+        <svg viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg">
+          <ellipse cx="450" cy="200" rx="200" ry="180" fill="#e2e8f0" />
+          <rect
+            x="320"
+            y="120"
+            width="180"
+            height="140"
+            rx="5"
+            fill="#2dd4bf"
+          />
+          <rect x="330" y="135" width="100" height="80" fill="#1a5f5a" />
+          <path d="M 200 320 Q 220 280 240 320" fill="#14b8a6" />
+          <circle cx="230" cy="340" r="15" fill="#14b8a6" />
+          <path
+            d="M 180 350 L 180 250 C 180 230 190 220 210 220 L 310 220"
+            stroke="#2dd4bf"
+            stroke-width="8"
+            fill="none"
+          />
+          <circle cx="260" cy="180" r="30" fill="#4c5270" />
+          <path
+            d="M 260 210 L 260 280 M 240 250 L 260 280 L 280 250"
+            stroke="#4c5270"
+            stroke-width="8"
+            fill="none"
+            stroke-linecap="round"
+          />
+          <circle cx="400" cy="340" r="12" fill="#2dd4bf" />
+          <circle cx="430" cy="360" r="8" fill="#2dd4bf" />
+        </svg>
+      </div>
+    </section>
+
+    <!-- Shortener Section -->
+    <section class="shortener">
+      <div class="shortener-box">
+        <form class="shortener-form">
+          <input
+            type="text"
+            class="shortener-input"
+            placeholder="Shorten a link here..."
+          />
+          <button type="button" class="btn-shorten">Shorten It!</button>
+        </form>
+      </div>
+    </section>
+    <section class="display">
+        
+    </section>
+
+    <!-- Statistics Section -->
+    <section class="statistics">
+      <h2>Advanced Statistics</h2>
+      <p>
+        Track how your links are performing across the web with our advanced
+        statistics dashboard.
+      </p>
+
+      <div class="features">
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#2dd4bf"
+              stroke-width="2"
+            >
+              <path d="M18 20V10M12 20V4M6 20v-6" />
+            </svg>
+          </div>
+          <div class="feature-divider"></div>
+          <h3>Brand Recognition</h3>
+          <p>
+            Boost your brand recognition with each click. Generic links don't
+            mean a thing. Branded links help instil confidence in your content.
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#2dd4bf"
+              stroke-width="2"
+            >
+              <circle cx="12" cy="12" r="10" />
+              <path d="M12 6v6l4 2" />
+            </svg>
+          </div>
+          <div class="feature-divider"></div>
+          <h3>Detailed Records</h3>
+          <p>
+            Gain insights into who is clicking your links. Knowing when and
+            where people engage with your content helps inform better decisions.
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#2dd4bf"
+              stroke-width="2"
+            >
+              <path d="M12 2L2 7l10 5 10-5-10-5z" />
+              <path d="M2 17l10 5 10-5M2 12l10 5 10-5" />
+            </svg>
+          </div>
+          <div class="feature-divider"></div>
+          <h3>Fully Customizable</h3>
+          <p>
+            Improve brand awareness and content discoverability through
+            customizable links, supercharging audience engagement.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+      <h2>Boost your links today</h2>
+      <a href="#get-started" class="btn-primary">Get Started</a>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div class="footer-content">
+        <div class="footer-logo">Shortly</div>
+
+        <div class="footer-links">
+          <div class="footer-column">
+            <h4>Features</h4>
+            <ul>
+              <li><a href="#link-shortening">Link Shortening</a></li>
+              <li><a href="#branded-links">Branded Links</a></li>
+              <li><a href="#analytics">Analytics</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-column">
+            <h4>Resources</h4>
+            <ul>
+              <li><a href="#blog">Blog</a></li>
+              <li><a href="#developers">Developers</a></li>
+              <li><a href="#support">Support</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-column">
+            <h4>Company</h4>
+            <ul>
+              <li><a href="#about">About</a></li>
+              <li><a href="#team">Our Team</a></li>
+              <li><a href="#careers">Careers</a></li>
+              <li><a href="#contact">Contact</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-column">
+            <div class="social-icons">
+              <a href="#facebook">f</a>
+              <a href="#twitter">t</a>
+              <a href="#pinterest">p</a>
+              <a href="#instagram">i</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
+  <!-- js link  -->
+  <script src="script.js"></script>
+  pt
+</html>
